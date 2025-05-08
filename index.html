@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Anime Fashion Brand</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #000;
+            z-index: 1000;
+            padding: 0 20px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .logo img {
+            height: 45px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            color: white;
+            font-size: 22px;
+            position: relative;
+            z-index: 1002;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ff3f3f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* Hamburger Menu */
+        #menuBtn {
+            position: relative;
+            z-index: 1002;
+            width: 28px;
+            height: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #menuBtn:hover {
+            transform: scale(1.1);
+        }
+
+        #menuBtn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #ff3f3f;
+            border-radius: 2px;
+            transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+            transform-origin: center;
+        }
+
+        #menuBtn:hover span {
+            background-color: white;
+        }
+
+        /* Sidebar Navigation */
+        .sidenav {
+            height: 100vh;
+            width: 85%;
+            max-width: 320px;
+            position: fixed;
+            z-index: 1001;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(135deg, #ff3f3f, #ff6a00);
+            color: white;
+            overflow-x: hidden;
+            overflow-y: auto;
+            transition: left 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+            padding-top: 80px;
+            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidenav.open {
+            left: 0;
+        }
+
+        .sidenav .search-container {
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: 10px 15px;
+            border-radius: 10px;
+        }
+
+        .sidenav input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidenav ul {
+            list-style: none;
+            padding: 10px 0;
+        }
+
+        .sidenav a {
+            padding: 16px 25px;
+            text-decoration: none;
+            font-size: 17px;
+            color: white;
+            display: block;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 5px 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidenav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .sidenav a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(8px);
+        }
+
+        .sidenav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 30px;
+            color: white;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .closebtn:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+
+        /* Submenu Styles */
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+            padding-left: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin: 0 15px;
+        }
+
+        .submenu.open {
+            max-height: 500px;
+        }
+
+        .submenu a {
+            font-size: 15px;
+            padding: 14px 20px;
+            margin: 2px 0;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 70px;
+            padding-bottom: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 65vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 90%;
+            padding: 0 20px;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.5s forwards;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff3f3f;
+            color: white;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: none;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(255, 63, 63, 0.3);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.8s ease-out 0.7s forwards;
+        }
+
+        .btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 63, 63, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Sections */
+        .section {
+            padding: 40px 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: #333;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff3f3f, #ff6a00);
+            border-radius: 3px;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        /* Product Cards */
+        .product-card, .category-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+
+        .product-card:hover, .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-card img, .category-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover img, .category-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-card h3 {
+            margin: 8px 0 5px;
+            font-size: 0.95rem;
+            color: #333;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .price {
+            font-weight: 600;
+            color: #ff3f3f;
+            font-size: 1rem;
+        }
+
+        /* Category Overlay */
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            overflow: hidden;
+            width: 100%;
+            height: 30%;
+            transition: height 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 15px;
+        }
+
+        .category-card:hover .category-overlay {
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            align-items: center;
+        }
+
+        .overlay-text {
+            color: white;
+            font-size: 1.3rem;
+            text-align: center;
+            padding: 0 10px;
+            font-weight: 600;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .category-card:hover .overlay-text {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Anime Section */
+        .anime-section {
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            margin: 20px 10px;
+            overflow: hidden;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .anime-product {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            aspect-ratio: 1/1;
+        }
+
+        .anime-product a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .anime-product img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .anime-product:hover img {
+            transform: scale(1.1);
+        }
+
+        .anime-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+            pointer-events: none;
+        }
+
+        .anime-product:hover .anime-overlay {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #000;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-icons a {
+            color: #aaa;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ff3f3f;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 480px) {
+            .hero {
+                height: 55vh;
+                min-height: 350px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 28px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 25px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+            }
+
+            .overlay-text {
+                font-size: 1.1rem;
+            }
+
+            .sidenav a {
+                padding: 14px 25px;
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                height: 70vh;
+                min-height: 500px;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 25px;
+                padding: 0;
+            }
+
+            .section {
+                padding: 40px 20px;
+            }
+
+            .anime-section {
+                margin: 20px auto;
+                padding: 0 10px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .section {
+                padding: 50px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="menuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="logo">
+            <a href="#"><img src="./logo/Screenshot_2025-02-19_133256-removebg-preview.png" alt="Brand Logo"></a>
+        </div>
+        <a href="#" class="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-count">3</span>
+        </a>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Search anime, products...">
+        </div>
+        <ul id="menuList">
+            <li class="submenu-parent">
+                <a href="#" onclick="toggleSubmenu(event)">Collections <i class="fas fa-chevron-down" style="float: right; margin-top: 3px;"></i></a>
+                <ul class="submenu">
+                    <li><a href="./Loose pants.html">New Arrivals</a></li>
+                    <li><a href="./Sweatshirt.html">Sweatshirts</a></li>
+                    <li><a href="./Hoodie.html">Hoodies</a></li>
+                    <li><a href="./T shirt.html">T-Shirts</a></li>
+                </ul>
+            </li>
+            <li class="submenu-parent">
+                <a href="#animesection" onclick="toggleSubmenu(event)">🔥 Anime Collection</a>
+            </li>
+            <li class="submenu-parent">
+                <a href="#" onclick="toggleSubmenu(event)">Track Your Order</a>
+            </li>
+            <li class="submenu-parent">
+                <a href="#" onclick="toggleSubmenu(event)">Custom Designs <i class="fas fa-chevron-down" style="float: right; margin-top: 3px;"></i></a>
+                <ul class="submenu">
+                    <li><a href="#">Create Your Own</a></li>
+                    <li><a href="#">Request Design</a></li>
+                </ul>
+            </li>
+            <li class="submenu-parent">
+                <a href="#" onclick="toggleSubmenu(event)">❤️ Wishlist</a>
+            </li>
+            <li class="submenu-parent">
+                <a href="./login page/login.php"><i class="fas fa-user" style="margin-right: 8px;"></i> LOGIN/REGISTER</a>
+            </li>
+        </ul>
+    </div>
+
+    <main>
+        <section class="hero">
+            <video class="bg-video" autoplay loop muted playsinline poster="./gif/Yameii-Jujutsu-Kaisen-S02E16-English-Dub-CR-WEB-DL-1080p-49D7C4CB_1-1.gif">
+                <source src="" type="video/mp4">
+            </video>
+            <div class="hero-content">
+                <h1>Created by Sahil </h1>
+            
+                <p>This website is for my portfolio .</p>
+                <a href="#newarrival" class="btn">Explore Now</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">COLLECTIONS</h2>
+            <div class="product-grid">
+                <div class="category-card">
+                    <a href="./Hoodie.html"><img src="./image/10_e5005678-1d3e-43d6-832a-b0dff0307f9c-300x300.png" alt="Hoodie">
+                    <div class="category-overlay">
+                        <div class="overlay-text">Hoodie Collection</div>
+                    </div></a>
+                </div>
+                <div class="category-card">
+                    <a href="./Loose pants.html"><img src="./image/10_e5005678-1d3e-43d6-832a-b0dff0307f9c-300x300.png" alt="Sweatshirts">
+                    <div class="category-overlay">
+                        <div class="overlay-text">Sweatshirts</div>
+                    </div></a>
+                </div>
+                <div class="category-card">
+                    <a href="./Sweatshirt.html"><img src="./image/10_e5005678-1d3e-43d6-832a-b0dff0307f9c-300x300.png" alt="Loose Pants">
+                    <div class="category-overlay">
+                        <div class="overlay-text">Loose Pants</div>
+                    </div></a>
+                </div>
+                <div class="category-card">
+                    <a href="./T shirt.html"><img src="./image/10_e5005678-1d3e-43d6-832a-b0dff0307f9c-300x300.png" alt="T-Shirts">
+                    <div class="category-overlay">
+                        <div class="overlay-text">T-Shirts</div>
+                    </div></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="newarrival" class="section">
+            <h2 class="section-title">New Arrivals</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <a href="./productpage.html"><img src="./image/10_9185b03a-d194-4739-b663-3b6e32e05c03-240x274.png" alt="Luxury printed t shirt"></a>
+                    <div class="product-info">
+                        <h3>Luxury Anime Print T-Shirt</h3>
+                        <p class="price">₹1050</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <a href="./productpage.html"><img src="./image/10_e5005678-1d3e-43d6-832a-b0dff0307f9c-300x300.png" alt="Designer Jacket"></a>
+                    <div class="product-info">
+                        <h3>Demon Slayer Jacket</h3>
+                        <p class="price">₹2500</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <a href="./productpage.html"><img src="./image/11_95cecb4f-9a33-42c1-ac23-46e2b196ea81-300x300.png" alt="Elegant Suit"></a>
+                    <div class="product-info">
+                        <h3>Jujutsu Kaisen Hoodie</h3>
+                        <p class="price">₹1800</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <a href="./productpage.html"><img src="./image/12_f001547b-2741-4be9-918b-4e6f560befce-700x700.png" alt="Stylish Top"></a>
+                    <div class="product-info">
+                        <h3>Naruto Graphic Tee</h3>
+                        <p class="price">₹950</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="animesection" class="section anime-section">
+            <h2 class="section-title">Shop By Anime</h2>
+            <div class="product-grid">
+                <div class="anime-product">
+                    <a href="./onepiece.html">
+                        <img src="./anime photo/100 Top idées de Fonds d'Ecran One Piece.jpg" alt="One Piece">
+                        <div class="anime-overlay">One Piece Collection</div>
+                    </a>
+                </div>
+                <div class="anime-product">
+                    <a href="./demon slayer.html">
+                        <img src="./anime photo/Demon Slayer New Wallpaper ❤🔥.jpg" alt="Demon Slayer">
+                        <div class="anime-overlay">Demon Slayer Styles</div>
+                    </a>
+                </div>
+                <div class="anime-product">
+                    <a href="./naruto.html">
+                        <img src="./anime photo/naruto or sukuna image.jpg" alt="Naruto">
+                        <div class="anime-overlay">Naruto Merch</div>
+                    </a>
+                </div>
+                <div class="anime-product">
+                    <a href="./jjt.html">
+                        <img src="./anime photo/The King Of Curses Sukuna 🔥🔥.jpg" alt="Jujutsu Kaisen">
+                        <div class="anime-overlay">Jujutsu Kaisen</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/sahil4lvi/"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/in/sahil-khan-24a01520b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>&copy; 2024 Anime Fashion Brand. All rights reserved.</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Premium anime-inspired apparel for true fans</p>
+    </footer>
+
+    <script>
+        // Toggle Sidebar with improved animation
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            const sidenav = document.getElementById('mySidenav');
+            sidenav.classList.toggle('open');
+            
+            // Animate hamburger icon to X
+            const spans = this.querySelectorAll('span');
+            if (sidenav.classList.contains('open')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+                document.body.style.overflow = 'hidden';
+            } else {
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close sidebar when clicking close button
+        document.querySelector('.closebtn').addEventListener('click', function() {
+            const sidenav = document.getElementById('mySidenav');
+            sidenav.classList.remove('open');
+            
+            // Reset hamburger icon
+            const spans = document.querySelectorAll('#menuBtn span');
+            spans[0].style.transform = '';
+            spans[1].style.opacity = '';
+            spans[2].style.transform = '';
+            document.body.style.overflow = '';
+        });
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidenav = document.getElementById('mySidenav');
+            const menuBtn = document.getElementById('menuBtn');
+            
+            if (!sidenav.contains(event.target) && event.target !== menuBtn && !menuBtn.contains(event.target)) {
+                sidenav.classList.remove('open');
+                
+                // Reset hamburger icon
+                const spans = document.querySelectorAll('#menuBtn span');
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Improved submenu toggle with animation
+        function toggleSubmenu(event) {
+            event.preventDefault();
+            const parent = event.target.closest('.submenu-parent');
+            const submenu = parent.querySelector('.submenu');
+            const icon = parent.querySelector('.fa-chevron-down');
+            
+            if (submenu) {
+                submenu.classList.toggle('open');
+                
+                // Rotate chevron icon
+                if (icon) {
+                    icon.style.transform = submenu.classList.contains('open') ? 'rotate(180deg)' : '';
+                }
+                
+                // Close other open submenus
+                document.querySelectorAll('.submenu').forEach(menu => {
+                    if (menu !== submenu && menu.classList.contains('open')) {
+                        menu.classList.remove('open');
+                        const otherIcon = menu.closest('.submenu-parent').querySelector('.fa-chevron-down');
+                        if (otherIcon) otherIcon.style.transform = '';
+                    }
+                });
+            }
+        }
+
+        // Search functionality
+        document.getElementById('searchBar').addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const menuItems = document.querySelectorAll("#menuList li");
+            
+            menuItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    item.style.display = "";
+                    // Open parent submenus if match is in submenu
+                    const submenu = item.closest('.submenu');
+                    if (submenu) {
+                        submenu.classList.add('open');
+                        const parent = submenu.closest('.submenu-parent');
+                        const icon = parent.querySelector('.fa-chevron-down');
+                        if (icon) icon.style.transform = 'rotate(180deg)';
+                    }
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+
+        // Add to cart animation
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A' || e.target.closest('a')) return;
+                
+                // Create animation element
+                const anim = document.createElement('div');
+                anim.style.position = 'fixed';
+                width: '20px';
+                height: '20px';
+                backgroundColor: '#ff3f3f';
+                borderRadius: '50%';
+                zIndex: '1000';
+                
+                // Get positions
+                const rect = this.getBoundingClientRect();
+                const cartRect = document.querySelector('.cart-icon').getBoundingClientRect();
+                
+                // Set initial position
+                anim.style.left = rect.left + rect.width/2 - 10 + 'px';
+                anim.style.top = rect.top + 'px';
+                document.body.appendChild(anim);
+                
+                // Animate to cart
+                const animation = anim.animate([
+                    { 
+                        left: rect.left + rect.width/2 - 10 + 'px',
+                        top: rect.top + 'px',
+                        opacity: 1,
+                        transform: 'scale(1)'
+                    },
+                    { 
+                        left: cartRect.left + cartRect.width/2 - 10 + 'px',
+                        top: cartRect.top + 'px',
+                        opacity: 0.5,
+                        transform: 'scale(0.5)'
+                    }
+                ], {
+                    duration: 600,
+                    easing: 'cubic-bezier(0.42, 0, 0.58, 1)'
+                });
+                
+                animation.onfinish = () => {
+                    anim.remove();
+                    // Update cart count
+                    const cartCount = document.querySelector('.cart-count');
+                    cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                    cartCount.style.transform = 'scale(1.3)';
+                    setTimeout(() => {
+                        cartCount.style.transform = '';
+                    }, 300);
+                };
+            });
+        });
+    </script>
+</body>
+</html>

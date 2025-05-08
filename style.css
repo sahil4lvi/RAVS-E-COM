@@ -1,0 +1,530 @@
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom right, #2b2e4a, #e84545);
+    color: #000000;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 0;
+    height: 60px;
+    background-color: #000000;
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Sidebar Styling */
+.sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: -300px; /* Hide initially */
+    background: linear-gradient(135deg, #ff3f3f, #ff6a00);
+    color: #ffffff;
+    overflow-x: hidden;
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.sidenav .search-container {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.sidenav .search-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: #333;
+}
+
+.sidenav a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    display: block;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.sidenav a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #ff6a00;
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding-left: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.submenu-open {
+    max-height: 300px; /* Adjust as necessary */
+}
+
+.submenu a {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #ffffff;
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.submenu a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(5px);
+}
+
+/* Hamburger Button Styling */
+#menuBtn {
+    position: relative;
+    z-index: 2;
+    top: 0px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+#menuBtn span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-color: #ff3f3f;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Hover animation for the hamburger icon */
+#menuBtn:hover span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: #ff6a00;
+}
+
+#menuBtn:hover span:nth-child(2) {
+    opacity: 0;
+}
+
+#menuBtn:hover span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: #ff6a00;
+}
+
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: rgb(248, 248, 248);
+    color: #f8f8f8;
+}
+
+.hero {
+    margin-top: 80px;
+    text-align: center;
+    padding: 80px 20px;
+    background: url(''); 
+    color: rgb(255, 255, 255);
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background-color: #000;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #333; /* Darker on hover */
+}
+
+.products {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.products h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(4, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background-color: rgba(245, 245, 245, 0.884);
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(106, 106, 106, 0.1);
+    transition: transform 0.2s;
+}
+
+.product-card img{
+
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+
+}
+
+.product-card img:hover { background-image: url(./style.css);}
+
+.product-card h3 {
+
+    margin: 15px 0;
+    font-weight: 600;
+  color: #000000;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+   
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000000;
+    font-size: 14px;
+    color: #777;
+    border-top: 1px solid #e0e0e0;
+}
+/* hero */
+.bg-video {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+ 
+
+
+
+  
+/*/catagory/*/
+
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 40px;}
+
+        .container {
+            position: relative;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.884);
+            border-radius: 10px;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+          
+          
+          .image {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transform: scale(1.1);
+          }
+          
+          .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #e6e6e65b;
+            overflow: hidden;
+            width: 100%;
+            height: 20%;
+            transition: .5s ease;
+          }
+          
+          .container:hover .overlay {
+            height: 100%;
+          }
+          
+          .text {
+            color: rgb(0, 0, 0);
+            font-size: 35px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+          }        
+          .catagories {
+            padding: 30px 30px;
+            text-align: center;
+        }
+
+
+        /* anime product section  */
+        .anime-products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+            margin-top: 5px;
+        }
+        .anime-section h1{
+            text-align: center;
+                margin-bottom: 40px;
+                font-size: 32px;
+                font-weight: 700;
+            }
+            #bgvideo {
+                position: absolute;
+            
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: -1;
+              }
+        
+        .anime-product {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .anime-product :hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .anime-product  img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+        
+        .product:hover img {
+            transform: scale(1.1);
+        }
+    
+        
+        /* Hover overlay effect */
+        .anime-product  .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        
+        .anime-product :hover .overlay {
+            opacity: 1;
+        }
+       
+
+
+
+    /* phone css */
+
+    @media screen and (max-width: 590px) {
+        body {
+          background-color: lightgreen;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            position: relative;
+            top: 0;
+            height: 60px;
+            background-color: #dddddd;
+        }
+        
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            size: 5px;
+        }
+        .hero {
+            margin-top: 5px;
+            text-align: center;
+            padding: 80px 20px;
+            background: url(''); 
+            color: rgb(255, 255, 255);
+            height: 100px;
+        }
+        
+        .hero h1 {
+            font-size: 20px;
+         
+            
+        }
+        
+        .hero p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            background-color: #251b1b;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #535353; /* Darker on hover */
+        }
+        
+        
+        /* hero */
+        .bg-video {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            height: 290px;
+            object-fit: cover;
+            z-index: -1;
+          }
+          .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            padding: 20px;
+            margin-top: 0px;
+        }
+        
+        .container {
+            background: rgb(255, 255, 255);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+       
+        
+        .container img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+        
+        .container:hover img {
+            transform: scale(1.1);
+        }
+        
+        .text {
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+          }
+        
+        .container:hover .info {
+            bottom: 0;
+        }
+        
+        .container .info h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        
+        .container .info .price {
+            margin: 10px 0;
+            color: #f45b69;
+            font-weight: bold;
+        }
+        
+        .container .info .discount {
+            color: #ddd;
+            font-size: 0.9em;
+        }
+        .anime-products {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+            margin-top: 5px}
+
+            .catagories {
+                padding: 0px 12px;
+                text-align: center;
+            }
+    
+     
+         
+        
+      
+        

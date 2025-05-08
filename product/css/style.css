@@ -1,0 +1,322 @@
+/* General Styling */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #2b2e4a, #e84545);
+    color: #f9f9f9;
+  }
+  
+  .product-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #111;
+    color: #f2f2f2;
+}
+.header1 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.header1 h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #f9f9f9;
+}
+
+.header1 p {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-top: 5px;
+  color: #ffd460;
+}
+header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 60px;
+    background-color:#dadada;
+
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Sidebar Styling */
+.sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: -300px; /* Hide initially */
+    background: linear-gradient(135deg, #ff3f3f, #ff6a00);
+    color: #ffffff;
+    overflow-x: hidden;
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.sidenav .search-container {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.sidenav .search-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: #333;
+}
+
+.sidenav a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    display: block;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.sidenav a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #ff6a00;
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding-left: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.submenu-open {
+    max-height: 300px; /* Adjust as necessary */
+}
+
+.submenu a {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #ffffff;
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.submenu a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(5px);
+}
+
+/* Hamburger Button Styling */
+#menuBtn {
+    position: absolute;
+    z-index: 2;
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+#menuBtn span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-color: #ff3f3f;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Hover animation for the hamburger icon */
+#menuBtn:hover span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: #ff6a00;
+}
+
+#menuBtn:hover span:nth-child(2) {
+    opacity: 0;
+}
+
+#menuBtn:hover span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: #ff6a00;
+}
+
+  
+  /* Product Section */
+  .product-container {
+    display: flex;
+    gap: 20px;
+    background: #393e46;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .image-gallery {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .main-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out;
+    cursor: zoom-in;
+  }
+  
+  .main-image img:hover {
+    transform: scale(1.2);
+    cursor: zoom-out;
+  }
+  
+  .thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .thumbnail {
+    width: 80px;
+    height: 80px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: border 0.3s;
+    cursor: pointer;
+  }
+  
+  .thumbnail:hover {
+    border: 2px solid #ffd460;
+  }
+  
+  .product-details {
+    flex: 1;
+  }
+  
+  .product-details h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .price {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .current-price {
+    font-weight: bold;
+    color: #ffd460;
+  }
+  
+  .original-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 10px;
+  }
+  
+  .discount {
+    color: #4caf50;
+    margin-left: 10px;
+  }
+  
+  .product-description {
+    margin: 15px 0;
+  }
+  .product-color{
+    margin: 15px 0;
+  }
+  
+  .buy-now {
+    padding: 12px 24px;
+    background-color: #e84545;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  
+  .buy-now:hover {
+    background-color: #c23b3b;
+
+  /* Related Products Section */
+.related-products {
+    margin-top: 40px;
+    padding: 20px;
+    background: #2b2e4a;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .related-products h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .product-card {
+    text-align: center;
+    background: #393e46;
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .product-card img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  
+  .product-card p {
+    margin: 5px 0;
+    color: #f9f9f9;
+  }
+  
+  .product-card .price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffd460;
+  }
+  .product-description{
+    color: rgb(228, 57, 57);}

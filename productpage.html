@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenz Clothing - Stylish Apparel</title>
+  <link rel="stylesheet" href="./product/css/style.css">
+</head>
+<body>
+  
+
+
+  <header>
+    <!-- Hamburger Button -->
+    <div id="menuBtn" onclick="toggleNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="logo">
+        <a href="#"><img src="./logo/Screenshot_2025-02-19_133256-removebg-preview.png" alt="Brand Logo" height="50"></a>
+    </div>
+              
+</header>
+
+<!-- Sidebar Navigation -->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">&times;</a>
+    <div class="search-container">
+        <input type="text" id="searchBar" onkeyup="filterMenu()" placeholder="Search..">
+    </div>
+    <ul id="menuList">
+        <li class="submenu-parent">
+            <a href="#" onclick="toggleSubmenu(event)">Collections</a>
+            <ul class="submenu">
+                <li><a href="./Loose pants.html">New Arrivals</a></li>
+                <li><a href="./Sweatshirt.html">Sweatshirts</a></li>
+                <li><a href="./Hoodie.html">Hoodies</a></li>
+                <li><a href="./T shirt.html">T-Shirts</a></li>
+            </ul>
+        </li>
+        <li class="submenu-parent">
+            <a href="#" onclick="toggleSubmenu(event)">🔥 Anime</a>
+        </li>
+        <li class="submenu-parent">
+            <a href="#" onclick="toggleSubmenu(event)">Track Your Order</a>
+        </li>
+        <li class="submenu-parent">
+            <a href="#" onclick="toggleSubmenu(event)">Customize</a>
+            <ul class="submenu"></ul>
+        </li>
+        <li class="submenu-parent">
+            <a href="#" onclick="toggleSubmenu(event)">❤️ Wishlist</a>
+        </li>
+        <li class="submenu-parent">
+            <a href="./login page/login.html" >LOGIN/REGISTER</a>
+        </li>
+    </ul>
+</div>
+
+
+<script>
+// Function to toggle sidebar visibility
+function toggleNav() {
+var sideNav = document.getElementById("mySidenav");
+sideNav.style.left = (sideNav.style.left === "0px") ? "-300px" : "0px";
+}
+
+// Function to toggle submenus
+function toggleSubmenu(event) {
+event.preventDefault();
+var submenu = event.target.nextElementSibling;
+var allSubmenus = document.querySelectorAll('.submenu');
+
+allSubmenus.forEach(function(sub) {
+    if (sub !== submenu) {
+        sub.classList.remove('submenu-open');
+    }
+});
+
+submenu.classList.toggle('submenu-open');
+}
+
+// Function to filter the sidebar menu
+function filterMenu() {
+var input = document.getElementById("searchBar").value.toLowerCase();
+var menuList = document.getElementById("menuList");
+var items = menuList.getElementsByTagName("li");
+
+Array.from(items).forEach(function(item) {
+    var a = item.querySelector("a");
+    var submenu = item.querySelector(".submenu");
+
+    if (a) {
+        var textValue = a.textContent || a.innerText;
+        var isMatch = textValue.toLowerCase().includes(input);
+
+        if (isMatch) {
+            item.style.display = "";
+        } else if (submenu) {
+            var submenuItems = submenu.getElementsByTagName("li");
+            var submenuVisible = Array.from(submenuItems).some(submenuItem => {
+                var submenuLink = submenuItem.querySelector("a");
+                return submenuLink && submenuLink.textContent.toLowerCase().includes(input);
+            });
+
+            if (submenuVisible) {
+                item.style.display = "";
+                submenu.classList.add('submenu-open');
+            } else {
+                item.style.display = "none";
+                submenu.classList.remove('submenu-open');
+            }
+        } else {
+            item.style.display = "none";
+        }
+    }
+});
+}
+</script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #fff;
+      color: #000;
+      font-size: 18px;
+    }
+    header {
+      background: #000000;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      font-size: 16px;
+    }
+    nav a {
+      text-decoration: none;
+      margin: 0 10px;
+      color: black;
+      font-weight: 600;
+    }
+    .container {
+      display: flex;
+      padding: 40px;
+      gap: 40px;
+      position: relative;
+    }
+    .images {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .images img {
+      width: 70px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      padding: 2px;
+    }
+    .main-image {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .main-image img {
+      width: 400px;
+      height: 500px;
+      object-fit: cover;
+  
+    }
+    .image-arrows {
+      position: absolute;
+      top: 50%;
+      left: -40px;
+      right: -40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transform: translateY(-50%);
+      width: 480px;
+    }
+    .arrow-btn {
+      background: #eee;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+    }
+    .zoom-lens {
+      position: absolute;
+      border: 2px solid #333;
+      width: 600px;
+      height: 500px;
+      display: none;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-size: 1000px 1250px;
+      z-index: 1000;
+    }
+    .info {
+      max-width: 500px;
+      z-index: 0;
+    }
+    .price {
+      margin: 10px 0;
+      font-size: 22px;
+    }
+    .price del {
+      color: gray;
+      margin-right: 10px;
+    }
+    .stars {
+      margin: 10px 0;
+      color: #0056d2;
+    }
+    .colors, .sizes {
+      margin: 20px 0;
+    }
+    .colors button, .sizes button {
+      padding: 14px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+      cursor: pointer;
+      background: white;
+      font-size: 18px;
+    }
+    .colors button.selected, .sizes button.selected {
+      border: 2px solid black;
+    }
+    .sizes button:disabled {
+      background: #f5f5f5;
+      cursor: not-allowed;
+      color: #aaa;
+    }
+    .quantity {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+    .quantity button {
+      padding: 14px;
+      font-size: 18px;
+    }
+    .buttons {
+      display: flex;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .select-button, .buy-button {
+      background: #9eb0e6;
+      padding: 15px;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 18px;
+      flex: 1;
+    }
+    .buy-button {
+      background: #6c2f11;
+    }
+    .description {
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="images" id="thumbnailContainer"></div>
+    <div class="main-image" id="mainImageContainer">
+      <div class="image-arrows">
+        <button class="arrow-btn" onclick="prevImage()">&#8249;</button>
+        <button class="arrow-btn" onclick="nextImage()">&#8250;</button>
+      </div>
+      <img id="mainImg" src="./image/Black-H-B-1-700x7002.jpg" alt="Main" />
+    </div>
+    <div class="info">
+      <h1>Wave Tee</h1>
+      <div class="price"><del>$85</del> $44</div>
+      <div class="stars">★★★★☆ (228)</div>
+      <div class="colors">
+        <strong>Color:</strong>
+        <button class="colorBtn selected" onclick="setColor('Black', this)">Black</button>
+        <button class="colorBtn" onclick="setColor('White', this)">White</button>
+      </div>
+      <div class="sizes">
+        <strong>Size:</strong>
+        <button class="sizeBtn" onclick="selectSize(this)">XS</button>
+        <button class="sizeBtn" onclick="selectSize(this)">S</button>
+        <button class="sizeBtn" onclick="selectSize(this)">M</button>
+        <button class="sizeBtn" onclick="selectSize(this)">L</button>
+        <button class="sizeBtn" onclick="selectSize(this)">XL</button>
+      </div>
+      <div class="quantity">
+        <strong>Quantity:</strong>
+        <button onclick="updateCount(-1)">-</button>
+        <span id="itemCount" style="margin: 0 10px;">1</span>
+        <button onclick="updateCount(1)">+</button>
+      </div>
+      <div class="buttons">
+        <button class="select-button" onclick="addToCart()">Add to Cart</button>
+        <button class="buy-button" onclick="buyNow()">Buy Now</button>
+      </div>
+      <div class="description">
+        <p>A premium-feel, ultra-comfy everyday t-shirt made with technical fabric.</p>
+      </div>
+    </div>
+    <div id="zoomLens" class="zoom-lens"></div>
+  </div>
+
+  <script>
+    const imageList = {
+        Black: [
+"./imagep/B2.jpg",
+"./imagep/B1.jpg",
+"./imagep/B3.jpg",
+"./imagep/B4.jpg"
+],
+White: [
+"./imagep/w1.png",
+"./imagep/W3.png",
+"./imagep/w2.png",
+"./imagep/w4.png"
+]
+};
+    let currentColor = 'Black';
+    let currentIndex = 0;
+
+    const mainImg = document.getElementById('mainImg');
+    const thumbnailContainer = document.getElementById('thumbnailContainer');
+    const zoomLens = document.getElementById('zoomLens');
+
+    function renderThumbnails() {
+      thumbnailContainer.innerHTML = '';
+      imageList[currentColor].forEach((src, index) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.onclick = () => changeImage(index);
+        thumbnailContainer.appendChild(img);
+      });
+    }
+
+    function changeImage(index) {
+      currentIndex = index;
+      mainImg.src = imageList[currentColor][index];
+      zoomLens.style.backgroundImage = `url('${mainImg.src}')`;
+    }
+
+    function prevImage() {
+      if (currentIndex > 0) {
+        changeImage(currentIndex - 1);
+      }
+    }
+
+    function nextImage() {
+      if (currentIndex < imageList[currentColor].length - 1) {
+        changeImage(currentIndex + 1);
+      }
+    }
+
+    function setColor(color, button) {
+      currentColor = color;
+      document.querySelectorAll('.colorBtn').forEach(btn => btn.classList.remove('selected'));
+      button.classList.add('selected');
+      changeImage(0);
+      renderThumbnails();
+    }
+
+    function selectSize(button) {
+      document.querySelectorAll('.sizeBtn').forEach(btn => btn.classList.remove('selected'));
+      button.classList.add('selected');
+    }
+
+    function updateCount(amount) {
+      const countSpan = document.getElementById('itemCount');
+      let count = parseInt(countSpan.textContent) + amount;
+      if (count < 1) count = 1;
+      countSpan.textContent = count;
+    }
+
+    function addToCart() {
+      alert("Added to cart!");
+    }
+
+    function buyNow() {
+      alert("Redirecting to checkout!");
+    }
+
+    mainImg.addEventListener('mousemove', function(e) {
+      const rect = mainImg.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      zoomLens.style.display = 'block';
+      zoomLens.style.left = rect.right + 20 + 'px';
+      zoomLens.style.top = rect.top + 'px';
+      zoomLens.style.backgroundImage = `url('${mainImg.src}')`;
+      zoomLens.style.backgroundPosition = `-${x * 2}px -${y * 2}px`;
+    });
+
+    mainImg.addEventListener('mouseleave', function() {
+      zoomLens.style.display = 'none';
+    });
+
+    renderThumbnails();
+    changeImage(0);
+  </script>
+</body>
+</html>
+
+
+ 
+</body>
+</html>
